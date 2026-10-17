@@ -1,0 +1,9 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+ <uses-permission android:name="android.permission.CALL_PHONE"/>
+ <uses-feature android:name="android.hardware.telephony" android:required="false"/>
+ <application android:label="Agenda de Contactos" android:theme="@style/AppTheme" android:allowBackup="false" android:supportsRtl="true">
+  <activity android:name=".controller.LlamarActivity" android:exported="false"/>
+  <activity android:name=".controller.ListaActivity" android:exported="false"/>
+  <activity android:name=".controller.RegistroActivity" android:exported="true"><intent-filter><action android:name="android.intent.action.MAIN"/><category android:name="android.intent.category.LAUNCHER"/></intent-filter></activity>
+ </application>
+</manifest>
