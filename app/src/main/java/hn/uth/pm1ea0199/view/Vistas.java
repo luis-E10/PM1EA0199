@@ -1,0 +1,12 @@
+package hn.uth.pm1ea0199.view;
+import android.app.*;import android.graphics.Color;import android.view.*;import android.widget.*;import android.graphics.Bitmap;import android.graphics.BitmapFactory;
+/** Vistas reutilizables; los eventos y las reglas pertenecen al controlador. */
+public class Vistas {
+ public static int dp(Activity a,int n){return (int)(n*a.getResources().getDisplayMetrics().density);}
+ public static LinearLayout pagina(Activity a,String titulo){LinearLayout l=new LinearLayout(a);l.setOrientation(1);l.setPadding(dp(a,20),dp(a,24),dp(a,20),dp(a,16));l.setBackgroundColor(Color.rgb(245,248,247));TextView t=new TextView(a);t.setText(titulo);t.setTextSize(26);t.setTextColor(Color.rgb(18,77,72));l.addView(t);TextView sub=new TextView(a);sub.setText("AGENDA DE CONTACTOS · PM1EA0199");sub.setTextSize(11);sub.setPadding(0,8,0,20);l.addView(sub);l.setOnApplyWindowInsetsListener((v,i)->{v.setPadding(dp(a,20),i.getSystemWindowInsetTop()+dp(a,16),dp(a,20),i.getSystemWindowInsetBottom()+dp(a,12));return i.consumeSystemWindowInsets();});return l;}
+ public static Button boton(Activity a,LinearLayout l,String texto){Button b=new Button(a);b.setText(texto);b.setAllCaps(false);l.addView(b,new LinearLayout.LayoutParams(-1,-2));return b;}
+ public static EditText campo(Activity a,LinearLayout l,String etiqueta,int tipo){TextView t=new TextView(a);t.setText(etiqueta);l.addView(t);EditText e=new EditText(a);e.setSingleLine(true);e.setInputType(tipo);l.addView(e,new LinearLayout.LayoutParams(-1,-2));return e;}
+ public static ImageView foto(Activity a,LinearLayout l){ImageView i=new ImageView(a);i.setContentDescription("Fotografía del contacto");i.setScaleType(ImageView.ScaleType.CENTER_INSIDE);i.setImageResource(android.R.drawable.ic_menu_camera);l.addView(i,new LinearLayout.LayoutParams(-1,dp(a,160)));return i;}
+ public static void mostrar(ImageView i,String ruta){if(ruta==null||ruta.isEmpty())return;BitmapFactory.Options o=new BitmapFactory.Options();o.inJustDecodeBounds=true;BitmapFactory.decodeFile(ruta,o);o.inSampleSize=1;while(o.outWidth/o.inSampleSize>1000||o.outHeight/o.inSampleSize>1000)o.inSampleSize*=2;o.inJustDecodeBounds=false;Bitmap b=BitmapFactory.decodeFile(ruta,o);if(b!=null)i.setImageBitmap(b);else i.setImageResource(android.R.drawable.ic_menu_report_image);}
+ public static void alerta(Activity a,String s){new AlertDialog.Builder(a).setTitle("Agenda").setMessage(s).setPositiveButton("Aceptar",null).show();}
+}
